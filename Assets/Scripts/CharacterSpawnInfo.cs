@@ -4,8 +4,8 @@ using UnityEngine;
 [Serializable]
 public struct CharacterSpawnInfo
 {
-    [SerializeField] public Character Character;
-    [SerializeField] public Vector3 SpawnPosition;
+    public Character Character;
+    public Vector3 SpawnPosition;
 
     public CharacterSpawnInfo (Character character, Vector3 spawnPosition)
     {

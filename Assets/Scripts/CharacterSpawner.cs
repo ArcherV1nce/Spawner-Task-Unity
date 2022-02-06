@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Timer))]
 public class CharacterSpawner : MonoBehaviour
 {
     [SerializeField] private List<CharacterSpawnInfo> _objectsInfo;
@@ -12,9 +13,14 @@ public class CharacterSpawner : MonoBehaviour
     private Timer _spawnTimer;
     private Coroutine _spawningCoroutine;
 
-    public void AddSpawnInfo (CharacterSpawnInfo spawnInfo)
+    public void AddInfo (CharacterSpawnInfo spawnInfo)
     {
         _objectsInfo.Add (spawnInfo);
+    }
+
+    private void Awake()
+    {
+        _spawnTimer = GetComponent<Timer>();
     }
 
     private void OnValidate()
@@ -54,11 +60,6 @@ public class CharacterSpawner : MonoBehaviour
         }
     }
 
-    private void ResetTimer()
-    {
-        _spawnTimer = new Timer(_spawnDelay);
-    }
-
     private IEnumerator SpawnCharacters ()
     {
         do
@@ -66,14 +67,8 @@ public class CharacterSpawner : MonoBehaviour
             for (int i = 0; i < _objectsInfo.Count; i++)
             {
                 Instantiate(_objectsInfo[i].Character, _objectsInfo[i].SpawnPosition, Quaternion.identity);
-                ResetTimer();
-
-                while (_spawnTimer.IsFinished == false)
-                {
-                    _spawnTimer.ReduceTime(Time.deltaTime);
-                    Debug.Log($"{_spawnTimer.TimeRemaining} seconds until next spawn.");
-                    yield return new WaitForFixedUpdate();
-                }
+                _spawnTimer.SetTime(_spawnDelay);
+                _spawnTimer.StartCountDown();
 
                 yield return new WaitUntil(() => _spawnTimer.IsFinished);
             }
