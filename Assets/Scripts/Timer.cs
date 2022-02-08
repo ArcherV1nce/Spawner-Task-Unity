@@ -5,38 +5,44 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private float _timeRemaining;
     private Coroutine _countDown;
 
-    public bool IsFinished => _timeRemaining <= 0;
-    public float TimeRemaining => _timeRemaining;
+    public bool IsFinished => TimeRemaining <= 0;
+    public float TimeRemaining { get; private set; }
 
     public Timer (float waitingTime)
     {
-        _timeRemaining = waitingTime;
+        TimeRemaining = waitingTime;
     }
 
     public void SetTime (float time)
     {
-        _timeRemaining = time;
+        Reset();
+
+        TimeRemaining = time;
     }
 
     public void StartCountDown ()
+    {
+        Reset();
+
+        _countDown = StartCoroutine(CountDown());
+    }
+
+    private void Reset()
     {
         if (_countDown != null)
         {
             StopCoroutine(_countDown);
             _countDown = null;
         }
-
-        _countDown = StartCoroutine(CountDown());
     }
 
     private IEnumerator CountDown ()
     {
         while (IsFinished == false)
         {
-            _timeRemaining -= Time.deltaTime;
+            TimeRemaining -= Time.deltaTime;
             Debug.Log($"{TimeRemaining} seconds until next spawn.");
             yield return new WaitForFixedUpdate();
         }

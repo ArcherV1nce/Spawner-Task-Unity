@@ -273,6 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1583089816}
   - component: {fileID: 1583089817}
+  - component: {fileID: 1583089818}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -307,14 +308,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectsInfo:
-  - Character: {fileID: 5565355205397120083, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
-    SpawnPosition: {x: 0, y: 0, z: 0}
-  - Character: {fileID: 5565355205397120083, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
-    SpawnPosition: {x: 1, y: 0, z: 0}
-  - Character: {fileID: 5565355205397120083, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
-    SpawnPosition: {x: 2, y: 0, z: 0}
+  - _character: {fileID: 5565355205397120083, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+    _spawnPosition: {x: 1, y: 0, z: 0}
+  - _character: {fileID: 5565355205397120083, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+    _spawnPosition: {x: 2, y: 0, z: 0}
+  - _character: {fileID: 5565355205397120083, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+    _spawnPosition: {x: 3, y: 0, z: 0}
   _spawnDelay: 2
   _isLooped: 0
+--- !u!114 &1583089818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583089815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ec4dab0f581304d86b51d5131a1b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2072396910
 GameObject:
   m_ObjectHideFlags: 0
